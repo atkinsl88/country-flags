@@ -1,7 +1,7 @@
 function init() {
 
   const countryList = document.querySelector('#countries')
-  const url = 'https://restcountries.eu/rest/v2/all'
+  const url = 'https://restcountries.com/v3.1/all'
   let countries = []
 
   async function getCountries() {
@@ -10,7 +10,7 @@ function init() {
       countries = await response.json()
       displayCountries()
     } catch (err) {
-      console.log('Something we wrong')
+      console.log('Something went wrong')
     }
   }
 
@@ -18,9 +18,9 @@ function init() {
     const htmlList = countries.map(country => {
       return `
       <div id="country">
-        <h2>${country.name}</h2>
-        <h3>${country.nativeName}</h3>
-        <img src=${country.flag}>
+        <h2>${country.name.common}</h2>
+        <h3>${country.region}</h3>
+        <img src=${country.flags.png}>
       </div>`
     })
     countryList.innerHTML = htmlList.join('')
